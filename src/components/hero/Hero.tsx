@@ -5,9 +5,9 @@ import HeroCTA from "./HeroCTA";
 export default function Hero() {
     return (
         <section className="min-h-[44vh] flex flex-col items-center justify-center bg-white text-center">
-            <HeroCTA/>
             <HeroTitle/>
             <HeroSubtitle/>
+            <HeroCTA/>
         </section>
     )
 }

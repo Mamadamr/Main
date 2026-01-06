@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://sarmin.ir
+
+# Sitemaps
+Sitemap: https://sarmin.ir/sitemap.xml

@@ -26,6 +26,13 @@ export default function NavLinks({ onClick }: { onClick?: () => void }) {
       >
        درباره ما
       </Link>
+      <Link
+        href="/sarmin"
+        onClick={onClick}
+        className="hover:text-primary text-black-200! font-bold text-2xl"
+      >
+       سارمین
+      </Link>
     </>
   );
 }

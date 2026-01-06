@@ -17,12 +17,22 @@ export default function About() {
 
         {/* متن درباره ما */}
         <div className="text-right">
-          <h2 className="text-3xl font-bold mb-6 text-gray-800">درباره ما</h2>
+          <h2 className="text-3xl font-bold mb-6 text-gray-800">
+            درباره سارمین | Sarmin
+          </h2>
           <p className="text-gray-600 mb-4 leading-relaxed">
-            شرکت <span className="font-semibold text-primary">Sarmin</span> با
-            هدف ارائه راهکارهای دیجیتال نوآورانه و طراحی وب‌سایت‌های حرفه‌ای
-            برای کسب‌وکارها در ایران تأسیس شد. ما با تیمی متخصص و خلاق، سعی
-            داریم تجربه کاربری بی‌نظیری را به مشتریان خود ارائه دهیم.
+            سارمین (Sarmin) یک پلتفرم و شرکت فعال در حوزه طراحی سایت، خرید سایت
+            و فروش سایت است که با هدف ارائه راهکارهای دیجیتال نوآورانه برای
+            کسب‌وکارهای ایرانی تأسیس شد. ما به کسب‌وکارها کمک می‌کنیم حضور
+            آنلاین حرفه‌ای، سریع و قابل اعتماد داشته باشند.
+            <br />
+            <br />
+            با تکیه بر تیمی متخصص و خلاق، تمرکز ما بر طراحی وب‌سایت‌های مدرن،
+            منوهای دیجیتال ریسپانسیو و سیستم‌های هوشمند فروش آنلاین است؛
+            راهکارهایی که تجربه کاربری روان و فروش بیشتر را برای شما به همراه
+            دارد. از منوی دیجیتال QR گرفته تا مدیریت سفارش‌ها به‌صورت لحظه‌ای و
+            پرداخت آنلاین امن، سارمین در تمام مراحل راه‌اندازی و رشد کسب‌وکار
+            آنلاین، کنار شماست تا برندتان را به سطح بالاتری برسانید.
           </p>
           <p className="text-gray-600 mb-6 leading-relaxed">
             از توسعه منوهای دیجیتال ریسپانسیو گرفته تا سیستم‌های مدیریت سفارش و
@@ -30,8 +40,11 @@ export default function About() {
             بعدی ارتقا دهیم.
           </p>
 
-          <Link href="/checkout/user-info" className="bg-primary text-white px-6 py-3 rounded-full hover:opacity-90 transition-all">
-            شروع همکاری
+          <Link
+            href="/checkout/user-info"
+            className="bg-gray-300!  text-white px-6 py-3 rounded-full hover:opacity-90 transition-all"
+          >
+            شروع همکاری با سارمین
           </Link>
         </div>
       </div>

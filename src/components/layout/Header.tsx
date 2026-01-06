@@ -16,7 +16,7 @@ export default function Header() {
   return (
     <header
       className={`sticky top-0 z-50 bg-white transition-all ${
-        scrolled ? "shadow-lg py-3" : "py-4"
+        scrolled ? "shadow-xl py-3" : "py-4"
       }`}
     >
       <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">

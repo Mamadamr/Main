@@ -5,25 +5,27 @@ export default function PurchaseCTA() {
   const router = useRouter();
 
   const handleBuy = () => {
-    // هدایت کاربر به صفحه خرید
     router.push("/checkout/user-info");
   };
 
   return (
-    <section className="bg-gradient-to-r from-gray-100 to-white py-16 px-6 text-center">
+    <section className="bg-gradient-to-b from-gray-100 to-white py-16 px-6 text-center">
       <h2 className="text-3xl font-bold mb-4 text-gray-800">
-        شروع کنید و کسب‌وکارتان را دیجیتال کنید
+        فروش آنلاین را با سارمین شروع کنید
       </h2>
-      <p className="text-gray-600 mb-8">
-        همین حالا پلن مناسب خود را انتخاب کنید و تجربه‌ی یک فروشگاه آنلاین
-        حرفه‌ای را داشته باشید.
+
+      <p className="text-gray-600 mb-8 max-w-2xl mx-auto">
+        با <strong>سارمین</strong> در چند دقیقه سایت فروشگاهی یا منوی دیجیتال
+        خود را راه‌اندازی کنید. بدون دانش فنی، با پرداخت آنلاین امن و مدیریت
+        سفارش حرفه‌ای.
       </p>
 
       <button
         onClick={handleBuy}
-        className="bg-primary hover:shadow-sm text-white px-8 py-4 rounded-full text-lg font-semibold hover:opacity-90 transition-all shadow-lg"
+        className="bg-primary text-white px-8 py-4 rounded-full text-lg font-semibold
+        shadow-lg hover:shadow-md hover:opacity-90 transition-all"
       >
-        خرید و شروع
+        خرید سایت و شروع فروش
       </button>
     </section>
   );
