@@ -17,12 +17,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={` antialiased`}
-      >
+      <head>
+        <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+      </head>
+      <body className={` antialiased`}>
         <Header />
         {children}
-        <Footer/>
+        <Footer />
       </body>
     </html>
   );
