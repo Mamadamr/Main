@@ -5,8 +5,8 @@ export default function Footer() {
     <div className="text-center py-6 bg-black  text-white! relative ">
       Sarmin © {new Date().getFullYear()}
       <div className="text-left p-6 flex  ">
-        <ul>
-          <li className="p-4 text-white!">
+        <ul className="block">
+          <li className="p-4 text-white! w-45">
             <Link
               href="/checkout/user-info"
               className="p-4 text-white! hover:m-[15px]  transition-all duration-700"
@@ -14,7 +14,7 @@ export default function Footer() {
               Get Started
             </Link>
           </li>
-          <li className="p-4 text-white!">
+          <li className="p-4 text-white! w-45">
             <Link
               href="/plans"
               className="p-4 text-white! hover:m-[15px]  transition-all duration-700"
@@ -22,7 +22,7 @@ export default function Footer() {
               Plans
             </Link>
           </li>
-          <li className="p-4 text-white!">
+          <li className="p-4 text-white! w-45">
             <Link
               href="/aboutus"
               className="p-4 text-white! hover:m-[15px]  transition-all duration-700"
@@ -30,7 +30,7 @@ export default function Footer() {
               About Us
             </Link>
           </li>
-          <li className="p-4 text-white!">
+          <li className="p-4 text-white! w-45">
             <Link
               href="/contact"
               className="p-4 text-white! hover:m-[15px]  transition-all duration-700"
@@ -39,16 +39,15 @@ export default function Footer() {
             </Link>
           </li>
         </ul>
-        <ul className="ml-125">
-          <li className="p-4 text-white!">
+        <ul className="">
+          <li className="p-6 text-white!">
             <Link
               href="/resume"
               className="p-4 text-white! hover:m-[15px]  transition-all duration-700"
             >
-              سایت های طراحی شده
+              resume
             </Link>
           </li>
-          
         </ul>
       </div>
     </div>

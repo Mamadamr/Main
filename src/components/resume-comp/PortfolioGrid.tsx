@@ -6,26 +6,26 @@ const projects = [
   {
     title: "وبسایت شرکتی",
     description: "UI/UX مدرن و ریسپانسیو",
-    image: "/portfolio/company.png",
-    link: "https://example.com",
+    image: "/resume/resume4.png",
+    link: "/",
   },
   {
     title: "فروشگاه آنلاین",
     description: "سفارشی‌سازی با Next.js و Tailwind",
-    image: "/portfolio/shop.png",
-    link: "https://example.com",
+    image: "/resume/resume2.png",
+    link: "/",
   },
   {
     title: "سایت شخصی",
     description: "Landing Page مدرن",
-    image: "/portfolio/personal.png",
-    link: "https://example.com",
+    image: "/resume/resume4.png",
+    link: "/",
   },
   {
     title: "اپلیکیشن وب",
     description: "React + Tailwind + Animations",
-    image: "/portfolio/webapp.png",
-    link: "https://example.com",
+    image: "/resume/resume3.png",
+    link: "/",  
   },
 ];
 

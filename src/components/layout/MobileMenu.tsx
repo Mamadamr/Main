@@ -54,9 +54,10 @@ export default function MobileMenu() {
           {/* Drawer با انیمیشن iOS */}
           <aside
             {...handlers}
-            className={`fixed top-0 right-0 h-full w-72 bg-white z-50
+            dir="ltr"
+            className={` absolute -right-10 top-0  h-100000 w-72 overflow-hidden!  bg-white z-50
               transform transition-transform duration-300 ease-out
-              ${open ? "translate-x-0" : "translate-x-full"}`}
+              ${open ? "-translate-x-10" : "left-1000"}`}
           >
             <div className="flex items-center justify-between p-6 border-b">
               <span className="font-bold text-lg">Sarmin</span>
@@ -64,7 +65,7 @@ export default function MobileMenu() {
               <button
                 onClick={() => setOpen(false)}
                 aria-label="Close menu"
-                className="text-2xl z-50 relative"
+                className="text-2xl z-50 relative "
               >
                 ×
               </button>
@@ -74,7 +75,7 @@ export default function MobileMenu() {
               className="flex bg-gray-300 relative -top-[13px] flex-col rounded-b-xl  gap-6 p-9 text-sm"
               onClick={() => setOpen(false)}
             >
-              <NavLinks  />
+              <NavLinks />
             </nav>
           </aside>
         </>

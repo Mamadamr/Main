@@ -33,3 +33,8 @@ body {
   background-image: url(../../public//slide//1000_header.jpg);
   height: 205px;
 }
+
+.child:nth-child(3){
+width: 100;
+display: none !important;
+}
