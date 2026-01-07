@@ -30,7 +30,7 @@ export default function PlanCard({
       `}
     >
       {featured && (
-        <span className="absolute -top-3 left-1/2 -translate-x-1/2 bg-primary text-white text-xs px-4 py-1 rounded-full">
+        <span className="absolute top-2 left-1/2 bg-red-200 -translate-x-1/2 bg-primary text-white text-xs px-4 py-1 rounded-full">
           پیشنهاد ویژه
         </span>
       )}
@@ -57,11 +57,11 @@ export default function PlanCard({
       <Link
         href={`/checkout/user-info?plan=${id}`}
         className={`
-          block text-center rounded-full px-6 py-3 font-medium transition
+          block border border-solid border-blue-900 border-2 text-center rounded-full px-6 py-3 font-medium transition
           ${
             featured
               ? "bg-primary text-white hover:opacity-90"
-              : "border border-border hover:bg-background"
+              : "border border-solid border-blue-900 border-2 hover:bg-background"
           }
         `}
       >

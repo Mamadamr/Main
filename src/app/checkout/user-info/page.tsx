@@ -4,27 +4,62 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Button from "../../../components/ui/Button";
 
+type Errors = {
+  name?: string;
+  email?: string;
+  phone?: string;
+};
+
 export default function UserInfoPage() {
   const router = useRouter();
 
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
+
+  const [errors, setErrors] = useState<Errors>({});
   const [loading, setLoading] = useState(false);
 
-  const handleNext = async () => {
-    if (!name || !email || !phone) return;
+  // ===== Regex =====
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  const phoneRegex = /^09\d{9}$/;
+
+  // ===== Field Validators =====
+  const validateField = (field: keyof Errors, value: string) => {
+    let error = "";
+
+    if (!value.trim()) {
+      error = "این فیلد الزامی است";
+    } else if (field === "email" && !emailRegex.test(value)) {
+      error = "ایمیل معتبر نیست";
+    } else if (field === "phone" && !phoneRegex.test(value)) {
+      error = "شماره موبایل باید 11 رقم و با 09 شروع شود";
+    }
+
+    setErrors((prev) => ({ ...prev, [field]: error }));
+    return !error;
+  };
+
+  // ===== Full Form Validation (Submit) =====
+  const validateForm = () => {
+    const validations = [
+      validateField("name", name),
+      validateField("email", email),
+      validateField("phone", phone),
+    ];
+
+    return validations.every(Boolean);
+  };
+
+  // ===== Submit =====
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    if (!validateForm()) return;
 
     setLoading(true);
-
     try {
-      // می‌توانید اینجا داده‌ها را به backend بفرستید یا context ذخیره کنید
-      // مثال: await api.saveUserInfo({ name, email, phone });
-
-      // ریدایرکت به مرحله بعدی (پرداخت)
       router.push("/checkout/payment");
-    } catch (error) {
-      console.error("خطا در ذخیره اطلاعات:", error);
     } finally {
       setLoading(false);
     }
@@ -37,13 +72,8 @@ export default function UserInfoPage() {
           اطلاعات کاربر
         </h1>
 
-        <form
-          className="space-y-5"
-          onSubmit={(e) => {
-            e.preventDefault();
-            handleNext();
-          }}
-        >
+        <form className="space-y-5" onSubmit={handleSubmit}>
+          {/* نام */}
           <div>
             <label className="block mb-1 text-gray-700">
               نام و نام خانوادگی
@@ -52,38 +82,65 @@ export default function UserInfoPage() {
               type="text"
               value={name}
               onChange={(e) => setName(e.target.value)}
-              required
-              className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary"
-              placeholder="مثال: محمد رضایی"
+              onBlur={(e) => validateField("name", e.target.value)}
+              className={`w-full border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 ${
+                errors.name
+                  ? "border-red-500 focus:ring-red-500"
+                  : "border-gray-300 focus:ring-primary"
+              }`}
+              placeholder="محمد رضایی"
             />
+            {errors.name && (
+              <p className="text-red-500 text-sm mt-1">{errors.name}</p>
+            )}
           </div>
 
+          {/* ایمیل */}
           <div>
             <label className="block mb-1 text-gray-700">ایمیل</label>
             <input
               type="email"
+              inputMode="email"
+              autoComplete="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              required
-              className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary"
+              onBlur={(e) => validateField("email", e.target.value)}
+              className={`w-full border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 ${
+                errors.email
+                  ? "border-red-500 focus:ring-red-500"
+                  : "border-gray-300 focus:ring-primary"
+              }`}
               placeholder="example@mail.com"
             />
+            {errors.email && (
+              <p className="text-red-500 text-sm mt-1">{errors.email}</p>
+            )}
           </div>
 
+          {/* موبایل */}
           <div>
-            <label className="block mb-1 text-gray-700">شماره تماس</label>
+            <label className="block mb-1 text-gray-700">شماره تلفن همراه</label>
             <input
               type="tel"
+              inputMode="numeric"
+              maxLength={11}
               value={phone}
-              onChange={(e) => setPhone(e.target.value)}
-              required
-              className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary"
-              placeholder="0912xxxxxxx"
+              onChange={(e) => setPhone(e.target.value.replace(/[^0-9]/g, ""))}
+              onBlur={(e) => validateField("phone", e.target.value)}
+              className={`w-full border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 ${
+                errors.phone
+                  ? "border-red-500 focus:ring-red-500"
+                  : "border-gray-300 focus:ring-primary"
+              }`}
+              placeholder="09123456789"
             />
+            {errors.phone && (
+              <p className="text-red-500 text-sm mt-1">{errors.phone}</p>
+            )}
           </div>
 
-          <Button >
-            {loading ? "در حال ادامه..." : "ادامه به پرداخت"}
+          <Button>
+            {loading ? "در حال بررسی..." : "ادامه به پرداخت"}
           </Button>
         </form>
       </div>

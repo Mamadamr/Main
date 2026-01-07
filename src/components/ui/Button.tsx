@@ -6,8 +6,12 @@ type Props = {
 
 export default function Button({ children }: Props) {
   return (
-    <Link href="/checkout/confirmation" className="bg-green-200 text-white px-6 py-3 rounded-full hover:opacity-90 transition-all">
+    <button type="submit" onClick={() => {
+      return (
+        <Link href="/src/app/checkout/payment/page.tsx"></Link>
+      )
+    }} className="bg-green-200 text-white px-6 py-3 rounded-full hover:opacity-90 transition-all">
       {children}
-    </Link>
+    </button>
   );
 }

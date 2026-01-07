@@ -18,7 +18,7 @@ export default function ConfirmationPage() {
         <p className="text-gray-700 mb-6">
           سفارش شما با موفقیت انجام شد. از پلن حرفه‌ای Sarmin لذت ببرید.
         </p>
-        <div className="w-full bg-red-500" onClick={handleDashboard}>
+        <div className="w-full " onClick={handleDashboard}>
           <Button>رفتن به داشبورد</Button>
         </div>
       </div>
