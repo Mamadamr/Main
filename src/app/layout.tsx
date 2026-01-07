@@ -7,7 +7,11 @@ import Footer from "../components/layout/Footer";
 
 export const metadata: Metadata = {
   title: "سارمین | Sarmin – طراحی سایت و فروش آنلاین",
-  description:" Sarmin is a smart platform for online sales, website creation, and digital menus, helping businesses launch and grow online.",
+  description:
+    " Sarmin is a smart platform for online sales, website creation, and digital menus, helping businesses launch and grow online.",
+  icons: {
+    icon: "/favicon.ico",
+  },
 };
 
 export default function RootLayout({
