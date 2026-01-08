@@ -1,14 +1,13 @@
 import { NextResponse } from "next/server";
 
 export async function POST() {
-  const res = NextResponse.json({ message: "خروج موفق" });
-  res.cookies.set({
-    name: "admin_token",
-    value: "",
+  const res = NextResponse.json({ success: true });
+
+  res.cookies.set("admin_token", "", {
     path: "/",
-    httpOnly: true,
-    maxAge: 0,
-    sameSite: "lax",
+    domain: "sarminco.ir",
+    expires: new Date(0),
   });
+
   return res;
 }

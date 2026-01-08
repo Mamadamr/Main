@@ -27,19 +27,15 @@ const orderStats = [
 export default function AdminDashboard() {
   const router = useRouter();
 
-const handleLogout = async () => {
-  try {
-    const res = await fetch("/api/logout", { method: "POST" });
-    if (res.ok) {
-      toast.success("خروج موفق!");
-       window.location.href = "https://sarminco.ir/login";
-    } else {
-      toast.error("خطا در خروج");
-    }
-  } catch {
-    toast.error("خطا در ارتباط با سرور");
-  }
-};
+ const logout = async () => {
+   await fetch("/api/admin/logout", { method: "POST" });
+
+   toast.success("با موفقیت خارج شدید");
+
+   setTimeout(() => {
+     window.location.href = "https://sarminco.ir/login";
+   }, 500);
+ };
 
 
 
@@ -84,9 +80,8 @@ const handleLogout = async () => {
           </LineChart>
         </ResponsiveContainer>
       </div>
-
       <button
-        onClick={handleLogout}
+        onClick={logout}
         className="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded"
       >
         خروج
