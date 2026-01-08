@@ -32,7 +32,7 @@ const handleLogout = async () => {
     const res = await fetch("/api/logout", { method: "POST" });
     if (res.ok) {
       toast.success("خروج موفق!");
-      router.replace("/login"); // ← replace بهتره تا back کار نکنه
+       window.location.href = "https://sarminco.ir/login";
     } else {
       toast.error("خطا در خروج");
     }
