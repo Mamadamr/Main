@@ -1,6 +1,6 @@
-"use client";
 
 import StatsCard from "@/components/admin/StatsCard";
+import toast, { Toaster } from "react-hot-toast";
 import {
   LineChart,
   Line,
@@ -12,8 +12,8 @@ import {
   CartesianGrid,
 } from "recharts";
 import { useRouter } from "next/navigation";
-import toast from "react-hot-toast";
 import clsx from "clsx";
+import { useEffect } from "react";
 const orderStats = [
   { day: "شنبه", new: 5, processing: 3, completed: 8, canceled: 1 },
   { day: "یک‌شنبه", new: 2, processing: 6, completed: 4, canceled: 0 },
@@ -27,18 +27,28 @@ const orderStats = [
 export default function AdminDashboard() {
   const router = useRouter();
 
- const logout = async () => {
-   await fetch("/api/admin/logout", { method: "POST" });
+  useEffect(() => {
+    // چک کردن کوکی
+    const token = document.cookie
+      .split("; ")
+      .find((row) => row.startsWith("admin_token="))
+      ?.split("=")[1];
 
-   toast.success("با موفقیت خارج شدید");
+    if (!token) {
+      toast.error("ابتدا وارد شوید!");
+      router.push("/admin/login");
+    }
+  }, [router]);
 
-   setTimeout(() => {
-     window.location.href = "https://sarminco.ir/login";
-   }, 500);
- };
-
-
-
+  const handleLogout = async () => {
+    try {
+      await fetch("/admin/api/logout", { method: "POST" });
+      toast.success("با موفقیت خارج شدید!");
+      router.push("/admin/login");
+    } catch {
+      toast.error("خطا در خروج!");
+    }
+  };
 
   return (
     <div className="min-h-screen bg-gray-100 p-6 space-y-8">
@@ -48,7 +58,7 @@ export default function AdminDashboard() {
         <StatsCard title="تکمیل شده" value={48} />
         <StatsCard title="لغو شده" value={5} />
       </div>
-
+      <Toaster position="top-right" reverseOrder={false} />
       <div className="bg-white p-4 rounded shadow">
         <h2 className="text-xl font-bold mb-4">نمودار وضعیت سفارشات هفته</h2>
         <ResponsiveContainer width="100%" height={300}>
@@ -81,7 +91,7 @@ export default function AdminDashboard() {
         </ResponsiveContainer>
       </div>
       <button
-        onClick={logout}
+        onClick={handleLogout}
         className="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded"
       >
         خروج
