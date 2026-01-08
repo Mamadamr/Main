@@ -1,11 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:news="http://www.google.com/schemas/sitemap-news/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:mobile="http://www.google.com/schemas/sitemap-mobile/1.0" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1" xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
-<url><loc>https://sarmin.ir/plans</loc><lastmod>2026-01-06T17:08:11.508Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>https://sarmin.ir/resume</loc><lastmod>2026-01-06T17:08:11.509Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>https://sarmin.ir/sarmin</loc><lastmod>2026-01-06T17:08:11.509Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>https://sarmin.ir/checkout/payment</loc><lastmod>2026-01-06T17:08:11.509Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>https://sarmin.ir/aboutus</loc><lastmod>2026-01-06T17:08:11.509Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>https://sarmin.ir/checkout/confirmation</loc><lastmod>2026-01-06T17:08:11.509Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>https://sarmin.ir/contact</loc><lastmod>2026-01-06T17:08:11.509Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>https://sarmin.ir/checkout/user-info</loc><lastmod>2026-01-06T17:08:11.509Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://sarmin.ir/admin/orders</loc><lastmod>2026-01-08T10:34:03.928Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://sarmin.ir/aboutus</loc><lastmod>2026-01-08T10:34:03.929Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://sarmin.ir/admin/settings</loc><lastmod>2026-01-08T10:34:03.929Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://sarmin.ir/checkout/confirmation</loc><lastmod>2026-01-08T10:34:03.929Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://sarmin.ir/checkout/payment</loc><lastmod>2026-01-08T10:34:03.929Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://sarmin.ir/contact</loc><lastmod>2026-01-08T10:34:03.929Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://sarmin.ir/plans</loc><lastmod>2026-01-08T10:34:03.929Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://sarmin.ir/resume</loc><lastmod>2026-01-08T10:34:03.929Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://sarmin.ir/sarmin</loc><lastmod>2026-01-08T10:34:03.929Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://sarmin.ir/sitemap.xml</loc><lastmod>2026-01-08T10:34:03.929Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://sarmin.ir/checkout/user-info</loc><lastmod>2026-01-08T10:34:03.929Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://sarmin.ir/login</loc><lastmod>2026-01-08T10:34:03.929Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://sarmin.ir/admin/admins</loc><lastmod>2026-01-08T10:34:03.929Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
 </urlset>
