@@ -6,7 +6,7 @@ export async function adminLogin(formData: FormData) {
   const username = formData.get("username");
   const password = formData.get("password");
 
-  if (username !== "admin" || password !== "123456") {
+  if (username !== "amr" || password !== "amirir6#@") {
     return { error: "نام کاربری یا رمز عبور اشتباه است" };
   }
 
