@@ -1,17 +1,13 @@
-// src/app/admin/api/logout/route.ts
 import { NextResponse } from "next/server";
 
 export async function POST() {
-  const response = NextResponse.redirect("/admin/login?success=خروج+موفقیت‌آمیز");
-  response.cookies.set({
-    name: "admin_token",
-    value: "",
-    path: "/",
-    maxAge: 0,
-    domain: "sarminco.ir",
-    httpOnly: true,
-    sameSite: "lax",
-  });
+  // پاک کردن کوکی
+  const response = NextResponse.json({ message: "خارج شدید" });
+  response.cookies.set("admin_token", "", { path: "/", maxAge: 0 });
   return response;
 }
 
+// اگر کسی GET بزنه، 405 برگردون
+export async function GET() {
+  return new NextResponse("Method Not Allowed", { status: 405 });
+}
