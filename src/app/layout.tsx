@@ -4,7 +4,6 @@ import Header from "../components/layout/Header";
 import Footer from "../components/layout/Footer";
 
 
-
 export const metadata: Metadata = {
   title: "سارمین | Sarmin – طراحی سایت و فروش آنلاین",
   description:
@@ -22,7 +21,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        <link rel="icon" href="/favicon.ico"  />
+        <link rel="icon" href="/favicon.ico" />
       </head>
       <body className={` antialiased`}>
         <Header />
