@@ -5,7 +5,7 @@ export async function POST(req: Request) {
   const { username, password } = data;
 
   // اعتبارسنجی ساده، میتونی دیتابیس بزاری
-  if (username === "admin" && password === "123456") {
+  if (username === "admin@sarminco.ir" && password === "Amirir6#@@") {
     const res = NextResponse.json({ message: "ورود موفق" });
 
     // تنظیم HttpOnly Cookie
