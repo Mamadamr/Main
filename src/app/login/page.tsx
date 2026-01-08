@@ -1,72 +1,53 @@
 "use client";
 
-import { useState } from "react";
-import { useRouter } from "next/navigation";
+import { adminLogin } from "@/app/actions/admin-login";
 import toast, { Toaster } from "react-hot-toast";
+import { useRouter } from "next/navigation";
 
 export default function AdminLoginPage() {
   const router = useRouter();
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const [loading, setLoading] = useState(false);
 
-  const handleLogin = async (e: React.FormEvent) => {
-    e.preventDefault();
+  async function handleSubmit(formData: FormData) {
+    const res = await adminLogin(formData);
 
-    setLoading(true);
-
-    try {
-      const res = await fetch("/admin/api/login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ username, password }),
-      });
-
-      const data = await res.json();
-
-      if (!res.ok) throw new Error(data.error || "خطای ورود");
-
-      toast.success("ورود موفقیت‌آمیز!");
-      router.push("/admin/dashboard");
-    } catch (err: any) {
-      toast.error(err.message || "خطای ورود");
-    } finally {
-      setLoading(false);
+    if (res?.error) {
+      toast.error(res.error);
+      return;
     }
-  };
+
+    toast.success("ورود موفق!");
+    setTimeout(() => {
+      router.push("/admin");
+    }, 600);
+  }
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <Toaster position="top-right" reverseOrder={false} />
+      <Toaster position="top-right" />
+
       <form
-        onSubmit={handleLogin}
-        className="bg-white p-8 rounded shadow-md w-full max-w-sm space-y-4"
+        action={handleSubmit}
+        className="bg-white p-6 rounded shadow w-80 space-y-4"
       >
-        <h2 className="text-xl font-bold text-center">ورود ادمین</h2>
+        <h1 className="text-xl font-bold text-center">ورود ادمین</h1>
 
         <input
-          type="text"
+          name="username"
           placeholder="نام کاربری"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-          className="w-full border px-3 py-2 rounded"
+          className="w-full border p-2 rounded"
           required
         />
+
         <input
+          name="password"
           type="password"
           placeholder="رمز عبور"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          className="w-full border px-3 py-2 rounded"
+          className="w-full border p-2 rounded"
           required
         />
 
-        <button
-          type="submit"
-          disabled={loading}
-          className="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700"
-        >
-          {loading ? "در حال ورود..." : "ورود"}
+        <button className="w-full bg-black text-white py-2 rounded">
+          ورود
         </button>
       </form>
     </div>

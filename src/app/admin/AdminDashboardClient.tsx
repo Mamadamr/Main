@@ -27,17 +27,11 @@ const orderStats = [
 export default function AdminDashboardClient() {
   const router = useRouter();
 
-  const handleLogout = async () => {
-    try {
-      const res = await fetch("/admin/api/logout", { method: "POST" });
-      if (!res.ok) throw new Error("خطا در خروج");
-      toast.success("با موفقیت خارج شدید!");
-      window.location.href = "/admin/login";
-    } catch (error) {
-      toast.error("خطا در خروج!");
-    }
-  };
-
+   const logout = async () => {
+     await fetch("/logout", { method: "POST" });
+     toast.success("خارج شدید");
+     window.location.href = "/admin/login";
+   };
   return (
     <div className="min-h-screen bg-gray-100 p-6 space-y-8">
       <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
@@ -80,8 +74,8 @@ export default function AdminDashboardClient() {
       </div>
 
       <button
-        onClick={handleLogout}
-        className="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded mt-6"
+        onClick={logout}
+        className="mt-6 bg-red-600 text-white px-4 py-2 rounded"
       >
         خروج
       </button>
