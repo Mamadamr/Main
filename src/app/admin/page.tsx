@@ -1,4 +1,4 @@
-"use clinet"
+"use clinet";
 import StatsCard from "@/components/admin/StatsCard";
 import toast, { Toaster } from "react-hot-toast";
 import {
@@ -12,8 +12,8 @@ import {
   CartesianGrid,
 } from "recharts";
 import { useRouter } from "next/navigation";
-import clsx from "clsx";
 import { useEffect } from "react";
+
 const orderStats = [
   { day: "شنبه", new: 5, processing: 3, completed: 8, canceled: 1 },
   { day: "یک‌شنبه", new: 2, processing: 6, completed: 4, canceled: 0 },
