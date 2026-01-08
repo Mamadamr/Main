@@ -30,7 +30,7 @@ export default function AdminDashboardClient() {
    const logout = async () => {
      await fetch("/logout", { method: "POST" });
      toast.success("خارج شدید");
-     window.location.href = "/admin/login";
+     window.location.href = "/login";
    };
   return (
     <div className="min-h-screen bg-gray-100 p-6 space-y-8">
