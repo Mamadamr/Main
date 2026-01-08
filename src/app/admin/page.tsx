@@ -6,7 +6,7 @@ export default function AdminPage() {
   const token = cookies().get("admin_token")?.value;
 
   if (!token) {
-    redirect("/admin/login");
+    redirect("/login");
   }
 
   return <AdminDashboardClient />;

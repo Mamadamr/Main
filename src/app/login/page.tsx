@@ -1,52 +1,54 @@
 "use client";
 
-import { adminLogin } from "@/app/actions/admin-login";
-import toast, { Toaster } from "react-hot-toast";
+import { adminLogin } from "@/app/actions/admin-actions";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
+import toast, { Toaster } from "react-hot-toast";
 
-export default function AdminLoginPage() {
+export default function LoginPage() {
   const router = useRouter();
+  const [loading, setLoading] = useState(false);
 
-  async function handleSubmit(formData: FormData) {
-    const res = await adminLogin(formData);
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    const formData = new FormData(e.currentTarget);
+    setLoading(true);
+    const t = toast.loading("در حال ورود...");
 
-    if (res?.error) {
-      toast.error(res.error);
-      return;
-    }
-
-    toast.success("ورود موفق!");
-    setTimeout(() => {
+    try {
+      await adminLogin(formData);
+      toast.success("ورود موفق!", { id: t });
       router.push("/admin");
-    }, 600);
+    } catch (err) {
+      toast.error("اطلاعات نامعتبر است", { id: t });
+    } finally {
+      setLoading(false);
+    }
   }
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <Toaster position="top-right" />
-
+      <Toaster />
       <form
-        action={handleSubmit}
-        className="bg-white p-6 rounded shadow w-80 space-y-4"
+        onSubmit={handleSubmit}
+        className="bg-white p-6 rounded shadow-md w-80 space-y-4"
       >
-        <h1 className="text-xl font-bold text-center">ورود ادمین</h1>
-
+        <h2 className="text-xl font-bold mb-2 text-center">ورود ادمین</h2>
         <input
-          name="username"
-          placeholder="نام کاربری"
+          name="email"
+          placeholder="ایمیل"
           className="w-full border p-2 rounded"
-          required
         />
-
         <input
-          name="password"
           type="password"
+          name="password"
           placeholder="رمز عبور"
           className="w-full border p-2 rounded"
-          required
         />
-
-        <button className="w-full bg-black text-white py-2 rounded">
+        <button
+          disabled={loading}
+          className="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700"
+        >
           ورود
         </button>
       </form>

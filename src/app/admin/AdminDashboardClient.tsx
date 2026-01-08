@@ -2,6 +2,7 @@
 
 import StatsCard from "@/components/admin/StatsCard";
 import toast, { Toaster } from "react-hot-toast";
+import { adminLogout } from "@/app/actions/admin-actions";
 import {
   LineChart,
   Line,
@@ -13,6 +14,7 @@ import {
   CartesianGrid,
 } from "recharts";
 import { useRouter } from "next/navigation";
+import { cookies } from "next/headers";
 
 const orderStats = [
   { day: "شنبه", new: 5, processing: 3, completed: 8, canceled: 1 },
@@ -25,13 +27,15 @@ const orderStats = [
 ];
 
 export default function AdminDashboardClient() {
-  const router = useRouter();
+ const router = useRouter();
 
-   const logout = async () => {
-     await fetch("/logout", { method: "POST" });
-     toast.success("خارج شدید");
-     window.location.href = "/login";
-   };
+ async function handleLogout() {
+   const t = toast.loading("در حال خروج...");
+   await adminLogout();
+   toast.success("خارج شدید", { id: t });
+   router.push("/login");
+ }
+
   return (
     <div className="min-h-screen bg-gray-100 p-6 space-y-8">
       <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
@@ -73,14 +77,8 @@ export default function AdminDashboardClient() {
         </ResponsiveContainer>
       </div>
 
-      <button
-        onClick={logout}
-        className="mt-6 bg-red-600 text-white px-4 py-2 rounded"
-      >
-        خروج
-      </button>
+      <button onClick={handleLogout}>خروج</button>
 
-      <Toaster position="top-right" reverseOrder={false} />
     </div>
   );
 }
