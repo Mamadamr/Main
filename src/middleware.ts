@@ -1,18 +1,19 @@
-import { NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
+import type { NextRequest } from "next/server";
 
 export function middleware(req: NextRequest) {
-  const token = req.cookies.get("admin_token");
-  const pathname = req.nextUrl.pathname;
+  const token = req.cookies.get("admin_token")?.value;
 
-  if (pathname.startsWith("/admin") && !token) {
-    return NextResponse.redirect(new URL("/login", req.url));
+  // اگر لاگین نکرده و مسیر /admin هست
+  if (!token && req.nextUrl.pathname.startsWith("/admin")) {
+    // URL کامل بساز
+    const loginUrl = new URL("/login", "https://sarminco.ir");
+    return NextResponse.redirect(loginUrl);
   }
 
-  if (pathname === "/login" && token) {
-    return NextResponse.redirect(new URL("/admin", req.url));
-  }
+  return NextResponse.next();
 }
 
 export const config = {
-  matcher: ["/admin/:path*", "/login"],
+  matcher: ["/admin/:path*"],
 };
