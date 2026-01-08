@@ -12,6 +12,7 @@ import {
   Legend,
   CartesianGrid,
 } from "recharts";
+import { useRouter } from "next/navigation";
 
 const orderStats = [
   { day: "شنبه", new: 5, processing: 3, completed: 8, canceled: 1 },
@@ -24,17 +25,18 @@ const orderStats = [
 ];
 
 export default function AdminDashboardClient() {
-const handleLogout = async () => {
-  try {
-    const res = await fetch("/admin/api/logout", { method: "POST" });
-    if (!res.ok) throw new Error("خطا در خروج");
-    toast.success("با موفقیت خارج شدید!");
-    window.location.href = "/admin/login";
-  } catch {
-    toast.error("خطا در خروج!");
-  }
-};
+  const router = useRouter();
 
+  const handleLogout = async () => {
+    try {
+      const res = await fetch("/admin/api/logout", { method: "POST" });
+      if (!res.ok) throw new Error("خطا در خروج");
+      toast.success("با موفقیت خارج شدید!");
+      window.location.href = "/admin/login";
+    } catch (error) {
+      toast.error("خطا در خروج!");
+    }
+  };
 
   return (
     <div className="min-h-screen bg-gray-100 p-6 space-y-8">
