@@ -1,4 +1,4 @@
-
+"use clinet"
 import StatsCard from "@/components/admin/StatsCard";
 import toast, { Toaster } from "react-hot-toast";
 import {
