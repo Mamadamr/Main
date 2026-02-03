@@ -14,8 +14,14 @@ export default function Sidebar() {
         <Link href="/admin/settings" className="p-2 hover:bg-gray-200 rounded">
           تنظیمات سایت
         </Link>
-        <Link href="/admin/admins" className="p-2 hover:bg-gray-200 rounded">
-          ادمین‌ها
+        <Link href="/admin/product" className="p-2 hover:bg-gray-200 rounded">
+          محصولات
+        </Link>
+        <Link href="/admin/plans" className="p-2 hover:bg-gray-200 rounded">
+          plans
+        </Link>
+        <Link href="/admin/addThings" className="p-2 hover:bg-gray-200 rounded">
+          add things
         </Link>
       </nav>
     </aside>

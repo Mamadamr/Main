@@ -5,7 +5,7 @@ export default function PurchaseCTA() {
   const router = useRouter();
 
   const handleBuy = () => {
-    router.push("/checkout/user-info");
+    router.push("/plans");
   };
 
   return (

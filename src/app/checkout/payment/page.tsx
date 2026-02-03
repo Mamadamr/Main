@@ -2,14 +2,27 @@
 
 import { useRouter } from "next/navigation";
 import Button from "../../../components/ui/Button";
+import { createOrder } from "./actions";
 
 export default function PaymentPage() {
   const router = useRouter();
 
-  const handlePayment = () => {
-    // اینجا می‌تونی اتصال به درگاه بانکی یا API پرداخت واقعی بزنی
-    // بعد از موفقیت، هدایت به صفحه تایید
-    router.push("/checkout/confirmation");
+  const handlePayment = async () => {
+    try {
+      // نمونه محصول و مبلغ
+      const products = [{ id: "plan_pro", name: "پلن حرفه‌ای", price: 49 }];
+      const total = 49;
+
+      // ثبت سفارش در سرور
+      const order = await createOrder("user123", products, total);
+
+      console.log("سفارش ثبت شد:", order);
+
+      // بعد از موفقیت، هدایت به صفحه تایید
+      router.push("/checkout/confirmation");
+    } catch (err: any) {
+      alert("خطا در ثبت سفارش: " + err.message);
+    }
   };
 
   return (
@@ -26,10 +39,10 @@ export default function PaymentPage() {
       </div>
 
       <div
-        className="space-y-4 w-full text-center bg-green-300 rounded-xl"
+        className="space-y-4 w-full text-center bg-green-300 rounded-xl cursor-pointer"
         onClick={handlePayment}
       >
-        <Button >پرداخت امن</Button>
+        <Button>پرداخت امن</Button>
       </div>
     </div>
   );

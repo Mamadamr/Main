@@ -1,13 +1,9 @@
-import { cookies } from "next/headers";
-import { redirect } from "next/navigation";
+"use client"
 import AdminDashboardClient from "./AdminDashboardClient";
 
 export default function AdminPage() {
-  const token = cookies().get("admin_token")?.value;
+ 
 
-  if (!token) {
-    redirect("/login");
-  }
 
   return <AdminDashboardClient />;
 }

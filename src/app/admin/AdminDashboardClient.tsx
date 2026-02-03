@@ -1,84 +1,138 @@
 "use client";
 
-import StatsCard from "@/components/admin/StatsCard";
-import toast, { Toaster } from "react-hot-toast";
-import { adminLogout } from "@/app/actions/admin-actions";
-import {
-  LineChart,
-  Line,
-  XAxis,
-  YAxis,
-  Tooltip,
-  ResponsiveContainer,
-  Legend,
-  CartesianGrid,
-} from "recharts";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { cookies } from "next/headers";
+import toast, { Toaster } from "react-hot-toast";
+import StatsCard from "@/components/admin/StatsCard";
 
-const orderStats = [
-  { day: "شنبه", new: 5, processing: 3, completed: 8, canceled: 1 },
-  { day: "یک‌شنبه", new: 2, processing: 6, completed: 4, canceled: 0 },
-  { day: "دوشنبه", new: 8, processing: 2, completed: 10, canceled: 2 },
-  { day: "سه‌شنبه", new: 4, processing: 5, completed: 7, canceled: 1 },
-  { day: "چهارشنبه", new: 6, processing: 4, completed: 5, canceled: 0 },
-  { day: "پنج‌شنبه", new: 3, processing: 3, completed: 6, canceled: 0 },
-  { day: "جمعه", new: 7, processing: 2, completed: 8, canceled: 1 },
-];
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Tooltip,
+  Legend,
+} from "chart.js";
+import { Line } from "react-chartjs-2";
 
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Tooltip,
+  Legend
+);
+
+// ---------------- CSRF ----------------
+function getCookie(name: string) {
+  const cookie = document.cookie
+    .split("; ")
+    .find((row) => row.startsWith(name + "="));
+  return cookie ? decodeURIComponent(cookie.split("=")[1]) : null;
+}
+
+async function csrf() {
+  await fetch("http://localhost:9000/sanctum/csrf-cookie", {
+    credentials: "include",
+  });
+}
+
+// ---------------- Fetch Admin ----------------
+async function fetchAdmin() {
+  await csrf();
+  const res = await fetch("http://localhost:9000/api/me", {
+    credentials: "include",
+  });
+  return res.json();
+}
+
+// ---------------- Fetch Orders ----------------
+async function fetchOrders() {
+  await csrf();
+  const res = await fetch("http://localhost:9000/api/orders", {
+    credentials: "include",
+  });
+  const data = await res.json();
+  return data.data || [];
+}
+
+// ---------------- Dashboard ----------------
 export default function AdminDashboardClient() {
- const router = useRouter();
+  const [orders, setOrders] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
+  const router = useRouter();
 
- async function handleLogout() {
-   const t = toast.loading("در حال خروج...");
-   await adminLogout();
-   toast.success("خارج شدید", { id: t });
-   router.push("/login");
- }
+  useEffect(() => {
+    async function init() {
+      const admin = await fetchAdmin();
+
+      if (!admin?.success || admin.user?.role !== "admin") {
+        toast.error("دسترسی غیرمجاز");
+        router.push("/login");
+        return;
+      }
+
+      const ordersData = await fetchOrders();
+      setOrders(ordersData);
+      setLoading(false);
+    }
+
+    init();
+  }, [router]);
+
+  // ---------------- تحلیل سفارشات ----------------
+  const statusCount = {
+    pending: 0,
+    paid: 0,
+    shipped: 0,
+    delivered: 0,
+    cancelled: 0,
+  };
+
+  orders.forEach((o) => {
+    if (statusCount[o.status as keyof typeof statusCount] !== undefined) {
+      statusCount[o.status as keyof typeof statusCount]++;
+    }
+  });
+
+  const chartData = {
+    labels: ["در انتظار", "پرداخت شده", "ارسال شده", "تحویل شده", "لغو شده"],
+    datasets: [
+      {
+        label: "تعداد سفارشات",
+        data: Object.values(statusCount),
+        borderColor: "#2563eb",
+        backgroundColor: "rgba(37,99,235,0.2)",
+        tension: 0.4,
+      },
+    ],
+  };
 
   return (
     <div className="min-h-screen bg-gray-100 p-6 space-y-8">
+      <Toaster />
+
       <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-        <StatsCard title="سفارشات جدید" value={35} />
-        <StatsCard title="در حال پردازش" value={25} />
-        <StatsCard title="تکمیل شده" value={48} />
-        <StatsCard title="لغو شده" value={5} />
+        <StatsCard title="در انتظار" value={statusCount.pending} />
+        <StatsCard title="پرداخت شده" value={statusCount.paid} />
+        <StatsCard title="تحویل شده" value={statusCount.delivered} />
+        <StatsCard title="لغو شده" value={statusCount.cancelled} />
       </div>
 
-      <div className="bg-white p-4 rounded shadow">
-        <h2 className="text-xl font-bold mb-4">نمودار وضعیت سفارشات هفته</h2>
-        <ResponsiveContainer width="100%" height={300}>
-          <LineChart data={orderStats}>
-            <CartesianGrid strokeDasharray="3 3" />
-            <XAxis dataKey="day" />
-            <YAxis />
-            <Tooltip />
-            <Legend />
-            <Line type="monotone" dataKey="new" stroke="#1f2937" name="جدید" />
-            <Line
-              type="monotone"
-              dataKey="processing"
-              stroke="#3b82f6"
-              name="در حال پردازش"
-            />
-            <Line
-              type="monotone"
-              dataKey="completed"
-              stroke="#10b981"
-              name="تکمیل شده"
-            />
-            <Line
-              type="monotone"
-              dataKey="canceled"
-              stroke="#ef4444"
-              name="لغو شده"
-            />
-          </LineChart>
-        </ResponsiveContainer>
+      <div className="bg-white p-6 rounded shadow">
+        <h2 className="text-xl font-bold mb-4">نمودار وضعیت سفارشات</h2>
+
+        {loading ? <p>در حال بارگذاری...</p> : <Line data={chartData} />}
       </div>
 
-      <button onClick={handleLogout}>خروج</button>
-
+      <button
+        onClick={() => router.push("/login")}
+        className="bg-red-600 text-white px-4 py-2 rounded"
+      >
+        خروج
+      </button>
     </div>
   );
 }

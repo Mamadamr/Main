@@ -8,11 +8,7 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
   }) {
-  const token = cookies().get("admin_token");
-
-  if (!token) {
-    redirect("/login");
-  }
+  
   return (
     <html lang="en">
       <body className="bg-gray-100 flex">

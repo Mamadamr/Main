@@ -1,7 +1,7 @@
 "use client"
 import { useState } from "react";
 import Toast from "@/components/admin/Toast";
-
+import AdminManagementSection from "../../../components/admin/AdminManagementSection"
 export default function SettingsPage() {
   const [activeTab, setActiveTab] = useState("general");
   const [toast, setToast] = useState<{
@@ -181,37 +181,12 @@ export default function SettingsPage() {
         )}
 
         {activeTab === "users" && (
-          <div className="flex flex-col gap-2">
-            {users.map((u, i) => (
-              <div key={i} className="flex gap-2">
-                <input
-                  type="text"
-                  value={u.name}
-                  onChange={(e) => {
-                    const newUsers = [...users];
-                    newUsers[i].name = e.target.value;
-                    setUsers(newUsers);
-                  }}
-                  className="border p-2 rounded flex-1"
-                />
-                <input
-                  type="email"
-                  value={u.email}
-                  onChange={(e) => {
-                    const newUsers = [...users];
-                    newUsers[i].email = e.target.value;
-                    setUsers(newUsers);
-                  }}
-                  className="border p-2 rounded flex-1"
-                />
-              </div>
-            ))}
-            <button
-              onClick={() => setUsers([...users, { name: "", email: "" }])}
-              className="bg-blue-500 text-white p-2 rounded mt-2"
-            >
-              اضافه کردن کاربر
-            </button>
+          <div className="flex flex-col gap-4">
+            {/* لیست کاربران معمولی */}
+            <h4 className="font-bold text-lg">کاربران سایت</h4>
+           
+            {/* ---------- Admin Management ---------- */}
+            <AdminManagementSection />
           </div>
         )}
 
